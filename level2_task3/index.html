@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To-Do List Web App</title>
+    <style>
+       
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: #ffc10785 no-repeat center center fixed;
+            background-size: cover;
+            color: #fff;
+        }
+
+        .container {
+            width: 80%;
+            max-width: 800px;
+            margin: 50px auto;
+            background: #5386056b;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.84);
+            color: #333;
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+
+        input,
+        textarea {
+            width: 97%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+
+        .button {
+            width: 100%;
+            padding: 10px;
+            font-size: 16px;
+            background-color: #28a745;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .button:hover {
+            background-color: #218838;
+        }
+
+        .task-list {
+            margin-top: 20px;
+        }
+
+        ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        li {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px;
+            margin-bottom: 10px;
+            background: #f8f9fa36;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        li.completed {
+            text-decoration: line-through;
+            color: #6c757d;
+        }
+
+        .task-actions button {
+            margin-left: 5px;
+            padding: 5px 10px;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+        }
+
+        .edit-btn {
+            background-color: #007bff;
+            color: #fff;
+        }
+
+        .edit-btn:hover {
+            background-color: #0056b3;
+        }
+
+        .delete-btn {
+            background-color: #dc3545;
+            color: #fff;
+        }
+
+        .delete-btn:hover {
+            background-color: #bd2130;
+        }
+
+        .complete-btn {
+            background-color: #28a745;
+            color: #fff;
+        }
+
+        .complete-btn:hover {
+            background-color: #218838;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>To-Do List Web App</h1>
+        <input type="text" id="taskInput" placeholder="Add a new task">
+        <button class="button" id="addTaskBtn">Add Task</button>
+
+        <div class="task-list">
+            <h2 style="color: red;">
+                Pending Tasks
+             </h2>
+            <ul id="pendingTasks"></ul>
+        </div>
+
+        <div class="task-list">
+            <h2 style="color: #28a745;">
+                Completed Tasks
+            </h2>
+            <ul id="completedTasks"></ul>
+        </div>
+    </div>
+
+    <script>
+        
+        document.getElementById('addTaskBtn').addEventListener('click', addTask);
+
+        let tasks = [];
+        let taskId = 0;
+
+        function addTask() {
+            const taskInput = document.getElementById('taskInput');
+            const taskText = taskInput.value.trim();
+
+            if (taskText !== "") {
+                const newTask = {
+                    id: taskId++,
+                    text: taskText,
+                    completed: false,
+                    createdAt: new Date().toLocaleString()
+                };
+
+                tasks.push(newTask);
+                renderTasks();
+                taskInput.value = "";
+            }
+        }
+
+        function renderTasks() {
+            const pendingTasks = document.getElementById('pendingTasks');
+            const completedTasks = document.getElementById('completedTasks');
+            pendingTasks.innerHTML = '';
+            completedTasks.innerHTML = '';
+
+            tasks.forEach(task => {
+                const taskElement = document.createElement('li');
+                taskElement.classList.toggle('completed', task.completed);
+
+                taskElement.innerHTML = `
+                    <span>${task.text}</span>
+                    <div class="task-actions">
+                        <button class="edit-btn" onclick="editTask(${task.id})">Edit</button>
+                        <button class="delete-btn" onclick="deleteTask(${task.id})">Delete</button>
+                        <button class="complete-btn" onclick="toggleComplete(${task.id})">
+                            ${task.completed ? 'Undo' : 'Complete'}
+                        </button>
+                    </div>
+                `;
+
+                if (task.completed) {
+                    completedTasks.appendChild(taskElement);
+                } else {
+                    pendingTasks.appendChild(taskElement);
+                }
+            });
+        }
+
+        function deleteTask(id) {
+            tasks = tasks.filter(task => task.id !== id);
+            renderTasks();
+        }
+
+        function editTask(id) {
+            const newText = prompt('Edit Task:', tasks.find(task => task.id === id).text);
+            if (newText !== null && newText.trim() !== '') {
+                tasks = tasks.map(task =>
+                    task.id === id ? { ...task, text: newText } : task
+                );
+                renderTasks();
+            }
+        }
+
+        function toggleComplete(id) {
+            tasks = tasks.map(task =>
+                task.id === id ? { ...task, completed: !task.completed } : task
+            );
+            renderTasks();
+        }
+    </script>
+</body>
+
+</html>
