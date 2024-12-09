@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tribute to Ratan Tata</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="https://unpkg.com/scrollreveal"></script>
+</head>
+<body>
+  <header class="hero">
+    <div class="hero-content">
+      <img src="ratantata1.jpg" alt="Ratan Tata" class="hero-image">
+      <h1 class="sr">Ratan Tata</h1>
+      <p class="sr">"A Visionary Who Redefined Business with Compassion"</p>
+    </div>
+  </header>
+  <main>
+    <section class="introduction">
+      <h2 class="sr">About Ratan Tata</h2>
+      <p class="sr">Ratan Tata, born on December 28, 1937, is a renowned Indian industrialist and philanthropist. He served as the chairman of the Tata Group, where he transformed the organization into a global powerhouse, driving innovations like the Tata Nano and acquisitions like Jaguar Land Rover.</p>
+      <p class="sr">Beyond business, he is celebrated for his philanthropic contributions through the Tata Trusts, supporting education, healthcare, and rural development.</p>
+    </section>
+    <section class="achievements">
+      <h2 class="sr">Key Achievements</h2>
+      <div class="cards">
+        <div class="card sr">
+          <h3>Tata Nano</h3>
+          <p>Revolutionized the automobile industry with the world's most affordable car.</p>
+        </div>
+        <div class="card sr">
+          <h3>Global Leadership</h3>
+          <p>Acquired globally recognized brands like Jaguar Land Rover and Tetley Tea.</p>
+        </div>
+        <div class="card sr">
+          <h3>Philanthropy</h3>
+          <p>Donated billions through Tata Trusts, impacting millions of lives in education, health, and community welfare.</p>
+        </div>
+        <div class="card sr">
+          <h3>Humility and Vision</h3>
+          <p>Known for his humility and ethical leadership, inspiring countless entrepreneurs worldwide.</p>
+        </div>
+      </div>
+    </section>
+    <section class="inspiration">
+      <h2 class="sr">Why I Admire Him</h2>
+      <p class="sr">Ratan Tata’s dedication to ethical leadership, his focus on innovation, and his empathy for society are unparalleled. His ability to balance business success with meaningful contributions to humanity makes him a true role model.</p>
+    </section>
+    <section class="gallery">
+      <h2 class="sr">Gallery</h2>
+      <div class="gallery-grid">
+        <img src="ratantataspeaking.jpg" alt="Ratan Tata speaking">
+        <img src="ratantatainanevent.jpg" alt="Ratan Tata in an event">
+        <img src="ratantataaward.webp" alt="Ratan Tata receiving an award">
+      </div>
+    </section>
+  </main>
+  <footer>
+    <p>"Take the stones people throw at you, and use them to build a monument." - Ratan Tata</p>
+  </footer>
+
+  <script>
+    // Initialize ScrollReveal
+    ScrollReveal().reveal('.sr', {
+      distance: '50px',
+      duration: 2000,
+      easing: 'ease-in-out',
+      opacity: 0,
+      scale: 0.9,
+      reset: false,
+      origin: 'bottom',
+      interval: 300
+    });
+  </script>
+</body>
+</html>
